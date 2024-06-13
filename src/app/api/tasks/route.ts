@@ -29,13 +29,25 @@ export async function POST(request: Request) {
   }
 }
 
+export async function PUT(request: Request) {
+  const { _id, title } = await request.json();
+
+  try {
+      const userCollection = await getDatabase("tasks");
+      await userCollection.updateOne({ _id: new ObjectId(_id)}, { $set: { title: title } });
+      return Response.json({ message: 'userData is updated' }, { status: 200 });
+  } catch (error) {
+      return Response.json({ message:"Error while updating userData", error: error }, { status: 500 });
+  }
+}
+
 export async function DELETE(request: Request) {
   const { _id } = await request.json();
 
   try {
       const userCollection = await getDatabase("tasks");
-      const response = await userCollection.deleteOne({ _id: new ObjectId(_id)});
-      console.log(response);
+      await userCollection.deleteOne({ _id: new ObjectId(_id)});
+      
       return Response.json({ message: 'userData is deleted' }, { status: 200 });
   } catch (error) {
       return Response.json({ message:"Error while deleting userData", error: error }, { status: 500 });
