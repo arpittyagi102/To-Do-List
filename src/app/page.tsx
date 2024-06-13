@@ -11,7 +11,7 @@ interface Task {
 }
 
 export default function Home() {
-  const [tasks, setTasks] = useState<Task[]>([]);         // list of tasks
+  const [tasks, setTasks] = useState<Task[]|null>(null);         // list of tasks
 
   const [newTask, setNewTask] = useState("");             // input value for new task
   const [isNewTaskActive, setIsNewTaskActive] = useState(false); // state to toggle new task input
@@ -67,11 +67,11 @@ export default function Home() {
   return (
     <main className="bg-gray-800 min-h-screen w-screen flex flex-col items-center">
       <div className="mt-10 w-11/12 max-w-[800px] max-h-5/6">
-        <h1 className="text-5xl self-start m-6">Arpit's To-Do List</h1>
+        <h1 className="text-3xl md:text-5xl self-start m-6 ">Arpit's To-Do List</h1>
 
         <div className="bg-gray-700 p-4 rounded-lg shadow-lg rounded-b-none w-full">
           <ul className="flex flex-col items-center justify-center my-4 gap-2">
-            { tasks.length ?
+            { tasks ?
               (tasks.map((task) => <Item key={task._id} _id={task._id} title={task.title} description={task.description} marked={task.marked} dueDate={task.dueDate} deleteTask={deleteTask}/>))
             :
               (<svg fill="#ffffff" width="32px" height="32px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" className="animate-spin my-16">
@@ -83,12 +83,12 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className={`flex justify-between items-center bg-slate-300 text-black rounded-t-none ${!isNewTaskActive && "rounded-xl border-b-2 border-black"} px-5 py-3 w-full hover:shadow-xl`} >
-          <input className="bg-transparent w-full text-xl focus:outline-none placeholder:text-gray-800"  value={newTask} onChange={handleInputChange} onKeyDown={handleKeyDown} onFocus={()=>setIsNewTaskActive(true)} placeholder="Enter new Task"/>
+        <div className={`flex justify-between items-center bg-slate-300 text-black rounded-t-none ${!isNewTaskActive && "rounded-xl border-b-2 border-black"} py-3 px-2 md:px-5 md:py-3 w-full hover:shadow-xl`} >
+          <input className="bg-transparent w-full text-sm md:text-xl focus:outline-none placeholder:text-gray-800"  value={newTask} onChange={handleInputChange} onKeyDown={handleKeyDown} onFocus={()=>setIsNewTaskActive(true)} placeholder="Enter new Task"/>
         </div>
         { isNewTaskActive && 
-          <div className="flex justify-between items-center bg-slate-400 text-black rounded-t-none rounded-xl px-5 py-3 w-full hover:shadow-xl">
-            <textarea className="bg-transparent w-full text-xl focus:outline-none placeholder:text-gray-800"  value={descriptionInput} onChange={(e)=>setDescriptionInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Enter the description of the task goes here"/>
+          <div className="flex justify-between items-center bg-slate-400 text-black rounded-t-none rounded-xl py-3 px-2 md:px-5 md:py-3 w-full hover:shadow-xl">
+            <textarea className="bg-transparent w-full text-sm md:text-xl focus:outline-none placeholder:text-gray-800"  value={descriptionInput} onChange={(e)=>setDescriptionInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Enter the description of the task goes here"/>
           </div>}
       </div>
     </main>
