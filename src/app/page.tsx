@@ -14,6 +14,9 @@ export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);         // list of tasks
 
   const [newTask, setNewTask] = useState("");             // input value for new task
+  const [isNewTaskActive, setIsNewTaskActive] = useState(false); // state to toggle new task input
+
+  const [descriptionInput, setDescriptionInput] = useState(""); // input value for description
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -31,17 +34,19 @@ export default function Home() {
   async function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
       if (event.key === "Enter") {
           // making changes locally
-          setTasks([...tasks, { _id: tasks.length + 1, title: newTask, description: "", marked: false, dueDate: "" }]);
-          setNewTask("");
+          setTasks([...tasks, { _id: tasks.length + 1, title: newTask, description: descriptionInput, marked: false, dueDate: "" }]);
           
           // making changes on the server
-          await fetch(window.location.origin + "/api/tasks", {
+          fetch(window.location.origin + "/api/tasks", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({ title: newTask, description: "", marked: false, dueDate: "" })
+            body: JSON.stringify({ title: newTask, description: descriptionInput, marked: false, dueDate: "" })
           });
+          setNewTask("");
+          setDescriptionInput("");
+          setIsNewTaskActive(false);
       }
   }
   
@@ -65,7 +70,7 @@ export default function Home() {
         <h1 className="text-5xl self-start m-6">Arpit's To-Do List</h1>
 
         <div className="bg-gray-700 p-4 rounded-lg shadow-lg rounded-b-none w-full">
-          <ul className="flex flex-col items-center justify-center mt-4 gap-2">
+          <ul className="flex flex-col items-center justify-center my-4 gap-2">
             { tasks.length ?
               (tasks.map((task) => <Item key={task._id} _id={task._id} title={task.title} description={task.description} marked={task.marked} dueDate={task.dueDate} deleteTask={deleteTask}/>))
             :
@@ -78,9 +83,13 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="flex justify-between items-center bg-slate-300 text-black bg-b rounded-t-none rounded-xl px-5 py-3 w-full hover:shadow-xl">
-          <input className="bg-transparent text-xl focus:outline-none placeholder:text-gray-800"  value={newTask} onChange={handleInputChange} onKeyDown={handleKeyDown} placeholder="Enter new Task"/>
+        <div className={`flex justify-between items-center bg-slate-300 text-black rounded-t-none ${!isNewTaskActive && "rounded-xl border-b-2 border-black"} px-5 py-3 w-full hover:shadow-xl`} >
+          <input className="bg-transparent w-full text-xl focus:outline-none placeholder:text-gray-800"  value={newTask} onChange={handleInputChange} onKeyDown={handleKeyDown} onFocus={()=>setIsNewTaskActive(true)} placeholder="Enter new Task"/>
         </div>
+        { isNewTaskActive && 
+          <div className="flex justify-between items-center bg-slate-400 text-black rounded-t-none rounded-xl px-5 py-3 w-full hover:shadow-xl">
+            <textarea className="bg-transparent w-full text-xl focus:outline-none placeholder:text-gray-800"  value={descriptionInput} onChange={(e)=>setDescriptionInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Enter the description of the task goes here"/>
+          </div>}
       </div>
     </main>
   );
