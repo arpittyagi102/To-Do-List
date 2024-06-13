@@ -11,7 +11,7 @@ interface Task {
 }
 
 export default function Home() {
-  const [tasks, setTasks] = useState<Task[]|null>(null);         // list of tasks
+  const [tasks, setTasks] = useState<any>(null);         // list of tasks
 
   const [newTask, setNewTask] = useState("");             // input value for new task
   const [isNewTaskActive, setIsNewTaskActive] = useState(false); // state to toggle new task input
@@ -31,7 +31,7 @@ export default function Home() {
     setNewTask(event.target.value);
   }
 
-  async function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+  async function handleKeyDown(event: any) {
       if (event.key === "Enter") {
           // making changes locally
           setTasks([...tasks, { _id: tasks.length + 1, title: newTask, description: descriptionInput, marked: false, dueDate: "" }]);
@@ -52,7 +52,7 @@ export default function Home() {
   
   async function deleteTask(id: string|number) {
     // making changes locally
-    setTasks(tasks.filter(task => task._id !== id));
+    setTasks(tasks.filter((task:any) => task._id !== id));
 
     // making changes on the server
     await fetch(window.location.origin + "/api/tasks", {
@@ -72,7 +72,7 @@ export default function Home() {
         <div className="bg-gray-700 p-4 rounded-lg shadow-lg rounded-b-none w-full">
           <ul className="flex flex-col items-center justify-center my-4 gap-2">
             { tasks ?
-              (tasks.map((task) => <Item key={task._id} _id={task._id} title={task.title} description={task.description} marked={task.marked} dueDate={task.dueDate} deleteTask={deleteTask}/>))
+              (tasks.map((task:any) => <Item key={task._id} _id={task._id} title={task.title} description={task.description} marked={task.marked} dueDate={task.dueDate} deleteTask={deleteTask}/>))
             :
               (<svg fill="#ffffff" width="32px" height="32px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" className="animate-spin my-16">
                 <g id="SVGRepo_iconCarrier"> 

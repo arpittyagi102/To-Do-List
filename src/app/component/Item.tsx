@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function Item({ _id, title, description, marked, dueDate, deleteTask }) {
+export default function Item(props:any) {
+    const { _id, title, description, marked, dueDate, deleteTask } = props;
+
     const inputRef = useRef<HTMLInputElement>(null);
     const [titleInput, setTitleInput] = useState(title);
     const [isEditing, setIsEditing] = useState(false);
@@ -19,13 +21,13 @@ export default function Item({ _id, title, description, marked, dueDate, deleteT
     useEffect(() => {
         // Calculate the height of the description content
         if (isDescriptionOpen) {
-            setDescriptionHeight(`${document.getElementById(`desc-${_id}`).scrollHeight}px`);
+            setDescriptionHeight(`${document?.getElementById(`desc-${_id}`)?.scrollHeight}px` || "0px");
         } else {
             setDescriptionHeight("0px");
         }
     }, [isDescriptionOpen, _id]);
 
-    const handleTaskInputKeyDown = async (e) => {
+    const handleTaskInputKeyDown = async (e:any) => {
         if (e.key === "Enter") {
             setIsEditing(false);
             updateTaskTitle();
