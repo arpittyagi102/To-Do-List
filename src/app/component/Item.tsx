@@ -53,7 +53,7 @@ export default function Item(props:any) {
             <div className="task-title flex justify-between items-center ">
                 <div className="left flex items-center grow">
                     {/* Menu Icon */}
-                    <svg className="w-4 h-4 mr-1 md:mr-3 md:w-6 md:h-6 md:mr-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                    <svg className="w-4 h-4 mr-2 md:w-6 md:h-6 md:mr-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
                         <g id="SVGRepo_iconCarrier"> 
                             <path d="M4 6H20M4 12H20M4 18H20" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> 
                         </g>
@@ -103,7 +103,7 @@ export default function Item(props:any) {
             </div>
            {/* Task Description */}
            <div
-                className="task-description overflow-hidden"
+                className="task-description overflow-hidden text-sm md:text-md"
                 id={`desc-${_id}`}
                 style={{ maxHeight: descriptionHeight, transition: 'max-height 0.3s ease-out' }}
             >

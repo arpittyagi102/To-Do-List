@@ -69,7 +69,7 @@ export default function Home() {
       <div className="mt-10 w-11/12 max-w-[800px] max-h-5/6">
         <h1 className="text-3xl md:text-5xl self-start m-6 ">Arpit's To-Do List</h1>
 
-        <div className="bg-gray-700 p-4 rounded-lg shadow-lg rounded-b-none w-full">
+        <div className="bg-gray-700 p-2 md:p-4 rounded-lg shadow-lg rounded-b-none w-full">
           <ul className="flex flex-col items-center justify-center my-4 gap-2">
             { tasks ?
               (tasks.map((task:any) => <Item key={task._id} _id={task._id} title={task.title} description={task.description} marked={task.marked} dueDate={task.dueDate} deleteTask={deleteTask}/>))
