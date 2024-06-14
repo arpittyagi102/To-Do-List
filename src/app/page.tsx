@@ -40,7 +40,7 @@ export default function Home() {
             headers: {
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({ title: newTask, description: descriptionInput, marked: false, dueDate: "" })
+            body: JSON.stringify({ title: newTask, description: descriptionInput, marked: false, dueDate: dueDateInput })
           });
           setNewTask("");
           setDescriptionInput("");
