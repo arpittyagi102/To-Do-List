@@ -16,6 +16,8 @@ export default function Home() {
   const [newTask, setNewTask] = useState("");             // input value for new task
   const [isNewTaskActive, setIsNewTaskActive] = useState(false); // state to toggle new task input
 
+  const [dueDateInput, setDueDateInput] = useState("");   // input value for due date
+
   const [descriptionInput, setDescriptionInput] = useState(""); // input value for description
 
   useEffect(() => {
@@ -27,14 +29,10 @@ export default function Home() {
     fetchTasks();
   },[]);
 
-  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setNewTask(event.target.value);
-  }
-
   async function handleKeyDown(event: any) {
       if (event.key === "Enter") {
           // making changes locally
-          setTasks([...tasks, { _id: tasks.length + 1, title: newTask, description: descriptionInput, marked: false, dueDate: "" }]);
+          setTasks([...tasks, { _id: tasks.length + 1, title: newTask, description: descriptionInput, marked: false, dueDate: dueDateInput }]);
           
           // making changes on the server
           fetch(window.location.origin + "/api/tasks", {
@@ -84,7 +82,8 @@ export default function Home() {
         </div>
 
         <div className={`flex justify-between items-center bg-slate-300 text-black rounded-t-none ${!isNewTaskActive && "rounded-xl border-b-2 border-black"} py-3 px-2 md:px-5 md:py-3 w-full hover:shadow-xl`} >
-          <input className="bg-transparent w-full text-sm md:text-xl focus:outline-none placeholder:text-gray-800"  value={newTask} onChange={handleInputChange} onKeyDown={handleKeyDown} onFocus={()=>setIsNewTaskActive(true)} placeholder="Enter new Task"/>
+          <input className="bg-transparent w-full text-sm md:text-xl focus:outline-none placeholder:text-gray-800"  value={newTask} onChange={(e) => setNewTask(e.target.value)} onKeyDown={handleKeyDown} onFocus={()=>setIsNewTaskActive(true)} placeholder="Enter new Task"/>
+          { isNewTaskActive && <input type="date" className="bg-transparent focus:outline-none" value={dueDateInput} onChange={(e) => setDueDateInput(e.target.value)}/> }
         </div>
         { isNewTaskActive && 
           <div className="flex justify-between items-center bg-slate-400 text-black rounded-t-none rounded-xl py-3 px-2 md:px-5 md:py-3 w-full hover:shadow-xl">

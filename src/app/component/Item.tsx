@@ -103,11 +103,12 @@ export default function Item(props:any) {
             </div>
            {/* Task Description */}
            <div
-                className="task-description overflow-hidden text-sm md:text-md"
+                className="task-description overflow-hidden text-sm md:text-md flex"
                 id={`desc-${_id}`}
                 style={{ maxHeight: descriptionHeight, transition: 'max-height 0.3s ease-out' }}
             >
-                <div className="text-gray-400 mt-2">{description || "no description"}</div>
+                <div className="text-gray-400 mt-2 grow">{description || "no description"}</div>
+                <span className="text-gray-400 ml-2 mt-2 min-w-max">{dueDate}</span>
             </div>
         </li>   
     );
