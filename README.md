@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js To-Do List Application
+
+Welcome to the most Robust yet elegant To-Do List application built using Next.js, TailwindCSS, and TypeScript. The application allows users to add, edit, and delete tasks with optional descriptions and due dates. The state is managed locally as well as synchronized with a server.
+
+## Features
+
+- Add new tasks with titles, descriptions, and due dates.
+- In place editing of task titles.
+- Seamlessly Deletion of tasks.
+- Toggle the visibility of task descriptions.
+- Responsive design with TailwindCSS.
+- Saving all the data in MongoDB through APIs
+- Smooth animations and transitions.
+
+## Technologies Used
+
+- [Next.js](https://nextjs.org/) - React framework for server-rendered applications.
+- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework.
+- [TypeScript](https://www.typescriptlang.org/) - Typed superset of JavaScript.
+- [MongoDB](https://mongodb.com/) - NoSQL based Database
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy of the project up and running, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Installation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clone the repository:
+    ```
+    git clone https://github.com/your-username/your-repo-name.git
+    ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. Navigate to the project directory:
+    ```
+    cd your-repo-name
+    ```
+3. Install dependencies:
+    ```
+    npm install
+    ```
+    or
+    ```
+    yarn install
+    ```
+4. Start the development server:
+    ```
+    npm run dev
+    ```
+    or
+    ```
+    yarn dev
+    ```
+5. Open your browser and navigate to http://localhost:3000.
